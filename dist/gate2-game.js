@@ -1,5 +1,6 @@
 /* Gate 2 唯一正式流程：/gate-2/ 只載入此檔，避免舊測試畫面覆寫新場景。 */
-const G2_KEY='rules-city-gate2-v4';
+// 開場全景與實體法案的位置已重新驗收；以新的測試存檔開始，避免舊版流程停在議事日程畫面。
+const G2_KEY='rules-city-gate2-v5';
 const G2_BILLS={blue:{tag:'政府案',name:'《校園安全管理法部分條文修正草案》',by:'提案機關：行政院'},orange:{tag:'委員案',name:'《校園安全管理法第十二條、第十五條及第十八條條文修正草案》',by:'提案人：陳○○等｜連署：17人'}};
 const G2_DOCS={
  agenda:{title:'議事日程審定紀錄',body:'兩份法律案已排入院會議程。'},
