@@ -1,0 +1,17 @@
+/* Gate 2 開場專屬 camera：不影響第一關的 680px 遊戲框。 */
+.g2-game{width:100vw;min-width:100vw}
+.g2-chamber.panorama{background:#16251f}
+.g2-chamber.panorama .g2-stage{position:absolute;inset:0;min-height:100dvh;padding:0;display:block}
+.g2-explore-pan{position:absolute;inset:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x;cursor:grab}
+.g2-explore-pan::-webkit-scrollbar{display:none}
+.g2-explore-pan.dragging{cursor:grabbing}
+.g2-explore-world{position:relative;width:max(1800px,220vw);min-width:1800px;height:100dvh;background:url('assets/backgrounds/legislature-chamber-panorama-v1.png') center center/cover no-repeat}
+.g2-intro-docs{position:absolute;inset:0;display:none}
+.g2-intro-docs.show{display:block}
+.g2-scene-file{width:176px;min-height:106px;padding:.7rem .72rem;border:0;border-top:8px solid #8ba7aa;background:linear-gradient(105deg,#f6eedf,#e7dcc7);color:#39342a;box-shadow:5px 8px 11px #0009;text-align:left;font:.78rem/1.45 serif}
+.g2-scene-file small{display:block;margin-bottom:.35rem;color:#77664e;font:.62rem sans-serif}
+.g2-scene-file.blue{left:12%;bottom:18%;transform:perspective(650px) rotateX(50deg) rotateZ(-6deg)}
+.g2-scene-file.orange{right:11%;bottom:17%;border-top-color:#b58a5c;transform:perspective(650px) rotateX(50deg) rotateZ(6deg)}
+.g2-scene-file:hover,.g2-scene-file:focus{filter:drop-shadow(0 10px 8px #0009);outline:2px solid #e3c573}
+.g2-begin-procedure{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);border:2px double #d8b56c;background:#173b34e8;color:#fff0d2;padding:.65rem 1rem;min-height:46px;box-shadow:3px 5px 9px #0009;white-space:nowrap}
+@media(max-width:430px){.g2-explore-world{width:max(1540px,395vw);min-width:1540px}.g2-scene-file{width:150px;min-height:92px;font-size:.69rem}.g2-scene-file.blue{left:10%;bottom:20%}.g2-scene-file.orange{right:9%;bottom:19%}.g2-begin-procedure{bottom:13%;font-size:.82rem}}
