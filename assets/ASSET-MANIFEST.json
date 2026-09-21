@@ -1,0 +1,19 @@
+{
+  "backgrounds": {
+    "classroom203": "backgrounds/classroom-203-sunset-v1.png",
+    "classroom203LockerOpen": "backgrounds/classroom-203-locker-open-v1.png",
+    "classroom203LockerAndBulletinOpen": "backgrounds/classroom-203-locker-bulletin-open-v1.png"
+  },
+  "replaceableOverlaySlots": {
+    "door": ["closed", "open"],
+    "cabinet": ["closed", "open"],
+    "bulletinCabinet": ["closed", "open"],
+    "keyBox": ["normal", "keyAvailable"],
+    "teacherDeskDrawer2": ["closed", "open"],
+    "classJournal": ["cover", "opened"],
+    "cabinetKey": ["default"],
+    "fragment1": ["default"]
+  },
+  "closeupSlots": ["class-journal-page", "social-control-cards", "seat-magnet-board", "name-magnets", "social-norm-folders", "norm-cards", "symbol-lock", "activity-assignment-sheet", "gender-notes", "checkout-stamp"],
+  "implementationNote": "All future image filenames are resolved by game state, not hard-coded geometry or image dimensions. Current UI text cards are deliberately HTML overlays so teachers can revise text."
+}
