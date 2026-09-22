@@ -4,3 +4,8 @@
 @keyframes g2-stamp-pulse{50%{transform:scale(1.06) rotate(-5deg);box-shadow:0 0 0 6px #bc5a4b33}}
 .g2-third-page mark{text-decoration:none;box-shadow:inset 0 -2px #ad5146}
 .g2-verify-row.selected,.g2-name-row button.selected{outline:2px solid #b66d45;transform:translateY(-2px)}
+.g2-branch-bills .g2-bill{transition:transform .18s ease,filter .18s ease,outline-color .18s ease}
+.g2-branch-bills .g2-bill:hover,.g2-branch-bills .g2-bill:focus-visible{filter:drop-shadow(0 9px 8px #0008);transform:translateY(-6px) scale(1.025)}
+.g2-branch-bills .g2-bill.picked{outline:2px solid #e9c679;outline-offset:3px;filter:drop-shadow(0 12px 10px #0009);transform:translateY(-10px) scale(1.045)!important}
+.g2-branch-options{transition:opacity .18s ease}.g2-branch-options:not(.ready) .g2-tray{opacity:.56}.g2-branch-options.ready .g2-tray{box-shadow:4px 7px 10px #0009,0 0 0 1px #e4bf783d}
+@media (hover:none){.g2-branch-bills .g2-bill:active{filter:drop-shadow(0 9px 8px #0008);transform:translateY(-6px) scale(1.025)}}
