@@ -1,0 +1,4 @@
+/* Gate 2 重玩確認：沿用米白紙張、紅墨與低干擾文字按鈕。 */
+.g2-folder-actions{margin:1rem 0 0;text-align:center}
+.g2-replay-link,.g2-replay-cancel{border:0;background:transparent;color:#66513b;padding:.45rem .65rem;font-size:.8rem;text-decoration:underline}
+.g2-replay-confirm{display:block;margin:.8rem auto .25rem;border:2px double #a8695e;background:#8d3d38;color:#fff1df;padding:.62rem .9rem;min-height:44px}
