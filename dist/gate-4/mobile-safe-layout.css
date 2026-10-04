@@ -1,0 +1,55 @@
+:root{
+  --gate4-safe-top:env(safe-area-inset-top,0px);
+  --gate4-safe-bottom:env(safe-area-inset-bottom,0px);
+  --gate4-edge-bottom:calc(18px + var(--gate4-safe-bottom));
+  --gate4-toast-bottom:calc(98px + var(--gate4-safe-bottom));
+}
+
+html,body{min-height:100%;min-height:100svh}
+
+/* iOS 網址列收合時，以動態視窗高度取代原本 560px 的固定最低高度。 */
+#app{
+  height:100vh;
+  height:100svh;
+  height:100dvh;
+  min-height:0;
+  padding-bottom:var(--gate4-safe-bottom);
+  isolation:isolate;
+}
+
+/* 所有舞台與文件均在 Home Indicator 及視窗底緣上方停止。 */
+.file-cover{bottom:calc(5% + var(--gate4-safe-bottom))}
+.opened-file{bottom:calc(24px + var(--gate4-safe-bottom));max-height:calc(100% - var(--gate4-safe-top) - var(--gate4-safe-bottom) - 64px);overflow:auto}
+.desk-stage,.lookup,.drawer-stage,.wind-stage,.case-stage,.final-desk{bottom:var(--gate4-edge-bottom)}
+.case-file,.final-file{max-height:calc(100% - var(--gate4-safe-top) - var(--gate4-safe-bottom) - 40px);overflow:auto}
+.case-file{top:calc(9% + var(--gate4-safe-top))}
+.final-file{top:calc(17% + var(--gate4-safe-top))}
+.unfiled-case{bottom:calc(13% + var(--gate4-safe-bottom))}
+.wind-stage>small,.source-finished,.next{bottom:var(--gate4-edge-bottom)}
+.lookup-complete .next{bottom:calc(72px + var(--gate4-safe-bottom))}
+
+/* 提示紙條不覆蓋底部抽屜或完成頁按鈕。 */
+.error-toast,.archive-toast{bottom:var(--gate4-toast-bottom)}
+
+/* 完成頁是可捲動的正常內容流；按鈕留在卷宗內，不建立固定底欄。 */
+.complete{
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  align-items:start;
+  padding:calc(26px + var(--gate4-safe-top)) 26px calc(30px + var(--gate4-safe-bottom));
+}
+.complete article{margin:auto;flex-shrink:0}
+
+/* 對話框也需在動態視窗與安全區內完整可捲動。 */
+.closeup,.confirm{max-height:calc(100% - var(--gate4-safe-top) - var(--gate4-safe-bottom) - 32px)}
+
+@media (max-height:660px){
+  .desk-stage,.lookup,.drawer-stage,.wind-stage,.case-stage,.final-desk{top:calc(66px + var(--gate4-safe-top))}
+  .opened-file{width:84%;padding:17px}
+  .case-file{top:calc(72px + var(--gate4-safe-top));min-height:0;padding:17px;font-size:14px}
+  .final-file{top:calc(82px + var(--gate4-safe-top));min-height:0;padding:18px}
+  .scenario{min-height:0;font-size:15px;padding:14px}
+  .drawers button{min-height:62px}
+  .complete article{padding:21px 16px}
+  .complete h1{font-size:29px}
+}
