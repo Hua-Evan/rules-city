@@ -29,7 +29,7 @@
     window.openCase1Summary();
   },true);
 
-  // 不論重新整理、重新開啟或先前網址帶了任何 query，都回正式案件桌面。
+  // 未完成關卡重整後回正式案件桌面；三案皆完成時保留完成頁。
   window.title=function(){desk()};
-  desk();
+  if(completion.gate3Completed&&window.showGate3Complete)window.showGate3Complete();else desk();
 })();

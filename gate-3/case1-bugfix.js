@@ -22,7 +22,7 @@ window.completeCase1=function(){
   saveCase1Progress({completed:Array.from(new Set([...(progress.completed||[]),'c1'])),case1Completed:true});closeModal();(window.returnToGate3Desk||desk)();
 };
 window.openCase1Summary=function(){
-  modal('<h2>案件一｜還沒賣出的大麻</h2><p><b>✓ 已結案</b></p><h3>本案取得線索</h3><p>🔍 <b>文義解釋</b><br>從法律文字可能具有的意義理解規範。</p><p>🧩 <b>體系解釋</b><br>從法律規範彼此之間的關係理解條文意義。</p><h3>案件結果</h3><p><b>司法院釋字第792號</b></p><p>本案重新檢視了過去實務對「販賣」一詞的理解。</p><button class="primary" onclick="returnToGate3Desk()">返回案件桌面</button>');
+  window.openCompletedCaseSummary('c1');
 };
 const case1FlowEntry=window.case1;
 window.case1=function(){const progress=case1Progress();if(progress.case1Completed||(progress.completed||[]).includes('c1')){window.openCase1Summary();return}return case1FlowEntry()};

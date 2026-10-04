@@ -83,5 +83,5 @@
   window.c3Exit3Answer=function(answer){if(answer!=='D'){retry('再想想：不能只看權利是否存在、單一損害或單一利益，還要看行使目的與具體衡量。','c3ExitQuestion3');return}markReview('exit-3','<p><b>你的答案：D</b></p><p>判斷時須觀察權利行使目的，並衡量所得利益與他人、國家社會所受損害。</p>');modal('<h2>整理判斷因素</h2><p>沒錯。法律不是只看「有沒有權利」或「有沒有人受損」，還要回到行使目的與具體情況綜合判斷。</p><button class="primary" onclick="c3Concept()">整理原則</button>')};
   window.c3Concept=function(){desk();modal('<h2>🚫 禁止權利濫用原則</h2><p>有權利，不代表可以毫無界線地行使。</p><p>判斷權利的行使是否超過法律容許的界線，除了觀察<b>權利行使的目的</b>，實務上也會依具體情況衡量：</p><p class="c3-balance"><b>權利人所得利益</b><br>↕<br><b>他人及國家社會所受損害</b></p><p>「造成他人不利益」≠「當然構成權利濫用」<br>「雙方利益不相等」≠「當然構成權利濫用」</p><p><b>是否構成權利濫用，仍須依個案具體情況綜合判斷。</b></p><button class="primary" onclick="c3Complete()">完成案件三</button>')};
   window.c3Complete=function(){desk();modal('<h2>案件三・審查完成</h2><p>取得：<br><b>🚫 禁止權利濫用原則</b></p><p>判斷的重點不是「有沒有人受到不利益」，而是權利的行使是否已經超過法律容許的界線。</p><button class="primary" onclick="finish(\'c3\')">返回案件桌面</button>')};
-  window.c3Summary=function(){desk();modal('<h2>案件三｜地是我的，為什麼不能拆？</h2><p>本案已完成審查。</p><p>已取得：<br>🚫 禁止權利濫用原則</p><button class="primary" onclick="returnToGate3Desk()">返回案件桌面</button>')};
+  window.c3Summary=function(){window.openCompletedCaseSummary('c3')};
 })();
