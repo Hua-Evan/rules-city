@@ -7,6 +7,48 @@
 
 html,body{min-height:100%;min-height:100svh}
 
+/* GATE 4 專用右上角選單：單一 44px 觸控入口，不使用共用固定導覽。 */
+.gate4-nav{position:relative;z-index:45}
+.gate4-menu-toggle{
+  width:44px;
+  min-width:44px;
+  height:44px;
+  min-height:44px;
+  padding:0;
+  border:1px solid #ecd6a6;
+  border-radius:4px;
+  background:#29251fe6;
+  color:#fff4d7;
+  font:700 21px/1 system-ui,sans-serif;
+  box-shadow:0 4px 12px #0006;
+}
+.gate4-menu{
+  display:none;
+  position:absolute;
+  top:50px;
+  right:0;
+  width:174px;
+  padding:6px;
+  border:1px solid #8d6841;
+  background:#382f25f2;
+  box-shadow:0 9px 22px #0008;
+}
+.gate4-menu-open .gate4-menu{display:grid}
+.gate4-menu button{
+  min-height:44px;
+  padding:10px 12px;
+  border:0;
+  border-radius:2px;
+  background:transparent;
+  color:#f6e7c5;
+  text-align:left;
+  font:700 14px/1.25 "Noto Serif TC","Microsoft JhengHei",serif;
+}
+.gate4-menu button+button{border-top:1px solid #f3dca72d}
+.gate4-menu button:active,.gate4-menu button:focus-visible{background:#d9b06b38;outline:2px solid #d9b06b;outline-offset:-2px}
+.gate4-confirm-actions{display:grid;grid-template-columns:1fr 1.25fr;gap:8px;margin-top:18px}
+.gate4-confirm-actions .plain,.gate4-confirm-actions .ink{margin:0;min-height:44px;border-radius:3px}
+
 /* 首屏與完成頁共用較小的 JPEG 場景；原 PNG 保留在專案中但不再請求。 */
 .room{background-image:url("assets/archive-room-evening.jpg")}
 .complete{background-image:linear-gradient(#19231d9b,#160c08ce),url("assets/archive-room-evening.jpg")}
