@@ -1,0 +1,6 @@
+/* Runner tuning: obstacles approach quickly enough to clear a normal jump. */
+@keyframes runner-obstacle-approach{
+  0%{left:106%;transform:translateX(-50%) scale(.44);opacity:.55}
+  55%{left:35%;transform:translateX(-50%) scale(.82);opacity:1}
+  100%{left:-20%;transform:translateX(-50%) scale(1);opacity:0}
+}

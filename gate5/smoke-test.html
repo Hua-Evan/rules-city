@@ -1,0 +1,6 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>Gate 5 smoke test</title><style>body{font-family:system-ui;margin:24px;background:#111b25;color:#f9ebcc}li{margin:6px 0}.ok{color:#9edb9c}.fail{color:#ffaba2}</style><h1>GATE 5 smoke test</h1><p id="status">準備測試…</p><ol id="results"></ol><iframe id="game" hidden></iframe><script>
+const scenes=['start','intro','act1','act2','quiz1','quiz2','results','policyresults','proportion','fine','quiz4','summary','final'];
+const out=document.querySelector('#results'), frame=document.querySelector('#game');
+const wait=(ms)=>new Promise(r=>setTimeout(r,ms));
+async function run(){let failures=0; for(const scene of scenes){localStorage.setItem('gate5_state_version','4');localStorage.setItem('gate5_current_scene',scene);frame.src=`./index.html?smoke=${scene}&t=${Date.now()}`;await wait(850);let ok=false;try{const app=frame.contentDocument.querySelector('#app');ok=!!app?.children.length&&!/關卡發生載入錯誤/.test(app.textContent)}catch(e){}const li=document.createElement('li');li.className=ok?'ok':'fail';li.textContent=`${ok?'✓':'✗'} ${scene}`;out.append(li);if(!ok)failures++}localStorage.removeItem('gate5_current_scene');document.querySelector('#status').textContent=failures?`完成：${failures} 個 scene 失敗。`:'完成：全部核心 scene 均有 UI。'}run();
+</script></html>
