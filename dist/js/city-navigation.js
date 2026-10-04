@@ -1,24 +1,21 @@
-/* 各關完成後回到規則之城，並以 localStorage 記錄完成狀態。 */
+/* 六關共用導覽：開始頁返回、進行中選單、未完成確認、完成頁返回。 */
 (() => {
   const gate = document.currentScript?.dataset.gate;
   if (!gate) return;
-  let installed = false;
-  const completeKey = `gate${gate}Completed`;
-  const hasFinished = () => {
-    const content = document.body?.innerText || '';
-    const patterns = {'1': /確認完成|完成第一關/, '2': /程序完成[。\s]*$|尚未完成的法案[\s\S]*重新測試第二關/, '3': /GATE 3 COMPLETE|\bCLEAR\b/, '4': /GATE 4 COMPLETE|已歸檔/, '5': /GATE 5 COMPLETE|任務完成｜關閉此頁/, '6': /GATE 6 COMPLETE/};
-    return patterns[gate]?.test(content);
-  };
-  const addReturn = () => {
-    if (!hasFinished()) return;
-    localStorage.setItem(completeKey, 'true');
-    if (installed || document.querySelector('[data-city-return]')) return;
-    installed = true;
-    const button = document.createElement('button');
-    button.type = 'button'; button.dataset.cityReturn = 'true'; button.className = 'city-return'; button.textContent = '返回規則之城';
-    button.addEventListener('click', () => { window.location.href = '../index.html'; });
-    document.body.append(button);
-  };
-  new MutationObserver(addReturn).observe(document.documentElement, {childList:true, subtree:true, characterData:true});
-  addReturn();
+  const completeKey = `gate${gate}Completed`, home = '../index.html';
+  const storageKeys = {'1':['rules-city-level1-final-v1'],'2':['rules-city-gate2-v5','rules-city-gate2-v4'],'3':['rules-city-gate3-v1'],'4':['rules-city-gate4-v1'],'5':['gate5_current_scene','gate5_game_time','gate5_concept_legal_reservation','gate5_concept_clarity','gate5_concept_proportionality','gate5_concept_due_process','gate5_run_result','gate5_complete','gate5_attempts'],'6':['rules-city-gate6-v1']};
+  const patterns = {'1':/確認完成|完成第一關/,'2':/尚未完成的法案[\s\S]*重新測試第二關/,'3':/GATE 3 COMPLETE|\bCLEAR\b/,'4':/GATE 4 COMPLETE|已歸檔/,'5':/GATE 5 COMPLETE|任務完成｜關閉此頁/,'6':/GATE 6 COMPLETE/};
+  const $ = (s,scope=document) => scope.querySelector(s);
+  const finished = () => patterns[gate].test(document.body?.innerText || '');
+  const startScreen = () => ({'1':!!$('.start'),'2':!!$('.g2-intro-dialogue:not(.hidden)'),'3':!!$('.title'),'4':!!$('.file-cover'),'5':/規則失控夜[\s\S]*末班車/.test(document.body?.innerText||''),'6':/進入案件受理室/.test(document.body?.innerText||'')})[gate];
+  const clearProgress = () => (storageKeys[gate]||[]).forEach(key=>localStorage.removeItem(key));
+  const closeMenu = () => document.body.classList.remove('city-menu-open');
+  const confirm = ({title,note,cancel,proceed,action}) => {closeMenu();document.querySelector('[data-city-confirm]')?.remove();const dialog=document.createElement('section');dialog.className='city-confirm';dialog.dataset.cityConfirm='true';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label',title);dialog.innerHTML=`<div class="city-confirm__paper"><h2>${title}</h2><p>${note}</p><div><button type="button" data-city-cancel>${cancel}</button><button type="button" class="city-confirm__proceed" data-city-proceed>${proceed}</button></div></div>`;dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.remove()});$('[data-city-cancel]',dialog).addEventListener('click',()=>dialog.remove());$('[data-city-proceed]',dialog).addEventListener('click',()=>{dialog.remove();action()});document.body.append(dialog);$('[data-city-cancel]',dialog).focus()};
+  const returnHome = () => {if(finished())return window.location.assign(home);confirm({title:'確定要返回規則之城嗎？',note:'本關目前進度不會保留。',cancel:'繼續本關',proceed:'返回規則之城',action:()=>{clearProgress();window.location.assign(home)}})};
+  const restart = () => confirm({title:'確定要重新開始本關嗎？',note:'本關目前進度將重新開始。',cancel:'取消',proceed:'重新開始',action:()=>{clearProgress();window.location.reload()}});
+  const render = () => {const isFinished=finished();document.body.classList.toggle('city-complete',isFinished);if(isFinished)localStorage.setItem(completeKey,'true');document.querySelectorAll('[data-city-navigation]').forEach(node=>node.remove());const overlay=document.createElement('div');overlay.dataset.cityNavigation='true';if(isFinished){overlay.className='city-finish-actions';overlay.innerHTML='<button type="button" class="city-finish-return" data-city-return>返回規則之城</button><button type="button" class="city-finish-restart" data-city-restart>重新挑戰本關</button>'}else if(startScreen()){overlay.className='city-start-return';overlay.innerHTML='<button type="button" data-city-return>返回規則之城</button>'}else{overlay.className='city-navigation';overlay.innerHTML='<button type="button" class="city-menu-toggle" aria-label="開啟關卡選單" aria-expanded="false" data-city-toggle>☰</button><div class="city-menu" role="menu"><button type="button" data-city-restart>重新開始本關</button><button type="button" data-city-return>返回規則之城</button><button type="button" data-city-close>關閉</button></div>'}overlay.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.matches('[data-city-return]'))returnHome();if(b.matches('[data-city-restart]'))restart();if(b.matches('[data-city-close]'))closeMenu();if(b.matches('[data-city-toggle]')){const open=!document.body.classList.contains('city-menu-open');document.body.classList.toggle('city-menu-open',open);b.setAttribute('aria-expanded',String(open))}});document.body.append(overlay)};
+  document.addEventListener('click',e=>{if(document.body.classList.contains('city-menu-open')&&!e.target.closest('[data-city-navigation]'))closeMenu()});
+  const playRoot=document.querySelector('#app,#gate6');
+  if(playRoot)new MutationObserver(render).observe(playRoot,{childList:true,subtree:true,characterData:true});
+  render();
 })();
