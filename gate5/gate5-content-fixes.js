@@ -24,17 +24,7 @@
 
   const renderComplete = () => {
     localStorage.setItem('gate5_complete', 'true');
-    app.innerHTML = '<div class="street"></div><div class="complete"><div class="paper"><h1>GATE 5 COMPLETE</h1><p>你完成了今晚的判斷與返家路程。</p><div class="gate5-complete-actions"><button class="next" type="button" data-gate5-complete-close>任務完成｜關閉此頁</button><button class="next" type="button" data-gate5-complete-restart>重新挑戰本關</button></div><p class="gate5-close-note" data-gate5-close-note hidden aria-live="polite">任務已完成，可以關閉這個頁面。</p></div></div>';
-    app.querySelector('[data-gate5-complete-close]')?.addEventListener('click', () => {
-      window.close();
-      window.setTimeout(() => {
-        if (!window.closed) app.querySelector('[data-gate5-close-note]')?.removeAttribute('hidden');
-      }, 180);
-    });
-    app.querySelector('[data-gate5-complete-restart]')?.addEventListener('click', () => {
-      window.Gate5Runtime?.removeGate5State?.();
-      window.location.reload();
-    });
+    app.innerHTML = '<div class="street"></div><div class="complete"><div class="paper"><h1>GATE 5 COMPLETE</h1><p>你完成了今晚的判斷與返家路程。</p></div></div>';
   };
 
   const normalizeEnding = () => {

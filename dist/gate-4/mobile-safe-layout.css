@@ -123,3 +123,5 @@ html,body{min-height:100%;min-height:100svh}
   .complete article{padding:21px 16px}
   .complete h1{font-size:29px}
 }
+
+.complete .gate4-finish-actions{display:grid;gap:8px;margin-top:16px}.complete .gate4-finish-actions .ink,.complete .gate4-finish-actions .plain{width:100%;min-height:44px;margin:0}
