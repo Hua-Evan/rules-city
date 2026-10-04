@@ -7,6 +7,10 @@
 
 html,body{min-height:100%;min-height:100svh}
 
+/* 首屏與完成頁共用較小的 JPEG 場景；原 PNG 保留在專案中但不再請求。 */
+.room{background-image:url("assets/archive-room-evening.jpg")}
+.complete{background-image:linear-gradient(#19231d9b,#160c08ce),url("assets/archive-room-evening.jpg")}
+
 /* iOS 網址列收合時，以動態視窗高度取代原本 560px 的固定最低高度。 */
 #app{
   height:100vh;
@@ -17,8 +21,29 @@ html,body{min-height:100%;min-height:100svh}
   isolation:isolate;
 }
 
+/* 首屏封面：卷宗與文字都以動態視窗高度定位，避免不同 iPhone 高度造成下沉。 */
+.file-cover{
+  bottom:calc(clamp(44px,8dvh,88px) + var(--gate4-safe-bottom));
+  width:min(94%,515px);
+}
+.cover-art{
+  position:absolute;
+  inset:0;
+  display:block;
+  background:url("assets/case-file-cover-v3.png") center/contain no-repeat;
+  filter:drop-shadow(7px 12px 10px #0009);
+}
+.cover-print{
+  z-index:1;
+  left:16%;
+  top:13%;
+  width:51%;
+  min-height:35%;
+  justify-content:center;
+}
+.file-cover:after{z-index:1;bottom:-16px}
+
 /* 所有舞台與文件均在 Home Indicator 及視窗底緣上方停止。 */
-.file-cover{bottom:calc(5% + var(--gate4-safe-bottom))}
 .opened-file{bottom:calc(24px + var(--gate4-safe-bottom));max-height:calc(100% - var(--gate4-safe-top) - var(--gate4-safe-bottom) - 64px);overflow:auto}
 .desk-stage,.lookup,.drawer-stage,.wind-stage,.case-stage,.final-desk{bottom:var(--gate4-edge-bottom)}
 .case-file,.final-file{max-height:calc(100% - var(--gate4-safe-top) - var(--gate4-safe-bottom) - 40px);overflow:auto}
@@ -44,6 +69,9 @@ html,body{min-height:100%;min-height:100svh}
 .closeup,.confirm{max-height:calc(100% - var(--gate4-safe-top) - var(--gate4-safe-bottom) - 32px)}
 
 @media (max-height:660px){
+  .file-cover{bottom:calc(38px + var(--gate4-safe-bottom));width:min(96%,480px)}
+  .cover-print{left:16%;top:12%;width:52%;min-height:34%}
+  .file-cover:after{bottom:-15px}
   .desk-stage,.lookup,.drawer-stage,.wind-stage,.case-stage,.final-desk{top:calc(66px + var(--gate4-safe-top))}
   .opened-file{width:84%;padding:17px}
   .case-file{top:calc(72px + var(--gate4-safe-top));min-height:0;padding:17px;font-size:14px}
