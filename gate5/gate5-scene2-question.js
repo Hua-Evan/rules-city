@@ -1,7 +1,6 @@
 /* The Scene 2 legal-clarity question has its own source of truth: answer A. */
 (() => {
   const SCENE = 'quiz2';
-  const REVEALED_KEY = 'gate5_scene2_revealed';
   const app = document.getElementById('app');
   const question = {
     title: '這種情況最可能造成什麼問題？',
@@ -34,14 +33,9 @@
     window.location.reload();
   });
   const continueToScene3 = () => window.Gate5Runtime?.safeTransition('results') || window.location.reload();
-  const renderReveal = () => {
-    console.info('[Gate5] Scene2Question reveal: A');
-    app.innerHTML = shell(`<div class="hint">正確答案：A｜${question.answers[question.correctAnswer]}<br>解析：${question.explanation}</div><button class="next" data-scene2-next>繼續前進</button>`);
-    bindRestart();
-    app.querySelector('[data-scene2-next]')?.addEventListener('click', continueToScene3);
-  };
   const renderSuccess = () => {
-    app.innerHTML = shell('<p class="memory">你記住了一句話：<br>「所以，到底什麼情況才算？」</p><small>法律明確性</small><button class="next" data-scene2-next>繼續前進</button>');
+    console.info('[Gate5] Scene2Question success: A');
+    app.innerHTML = shell(`<div class="hint"><b>答對了。</b><br>正確答案：A｜${question.answers[question.correctAnswer]}<br>解析：${question.explanation}</div><p class="memory">你記住了一句話：<br>「所以，到底什麼情況才算？」</p><small>法律明確性</small><button class="next" data-scene2-next>繼續前進</button>`);
     bindRestart();
     app.querySelector('[data-scene2-next]')?.addEventListener('click', continueToScene3);
   };
@@ -57,14 +51,14 @@
     attempts.clarity = nextCount;
     writeAttempts(attempts);
     if (selectedAnswer === question.correctAnswer) {
-      localStorage.removeItem(REVEALED_KEY);
       localStorage.setItem('gate5_concept_clarity', 'true');
       return renderSuccess();
     }
-    if (nextCount === 1) return renderQuestion(question.hint);
     localStorage.setItem('gate5_concept_clarity', 'false');
-    localStorage.setItem(REVEALED_KEY, 'true');
-    renderReveal();
+    const hint = nextCount === 1
+      ? question.hint
+      : '再想一想：重點是一般人能否事先理解、預見哪些行為可能受到盤查，而不是禁止使用抽象文字。';
+    renderQuestion(hint);
   };
   const buttonIndex = (button) => 'ABCD'.indexOf(button.textContent.trim().charAt(0));
   document.addEventListener('click', (event) => {
@@ -79,7 +73,6 @@
   }, true);
   queueMicrotask(() => {
     if (!isScene2Question()) return;
-    if (localStorage.getItem(REVEALED_KEY) === 'true') return renderReveal();
     console.info('[Gate5] Scene2Question mounted; correctAnswer = A');
   });
 })();
