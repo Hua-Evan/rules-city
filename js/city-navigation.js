@@ -4,7 +4,7 @@
   if (!gate) return;
   const completeKey = `gate${gate}Completed`, home = '../index.html';
   const storageKeys = {'1':['rules-city-level1-final-v1'],'2':['rules-city-gate2-v5','rules-city-gate2-v4'],'3':['rules-city-gate3-v1'],'4':['rules-city-gate4-v1'],'5':['gate5_current_scene','gate5_game_time','gate5_concept_legal_reservation','gate5_concept_clarity','gate5_concept_proportionality','gate5_concept_due_process','gate5_run_result','gate5_complete','gate5_attempts'],'6':['rules-city-gate6-v1']};
-  const patterns = {'1':/確認完成|完成第一關/,'2':/尚未完成的法案[\s\S]*重新測試第二關/,'3':/GATE 3 COMPLETE|\bCLEAR\b/,'4':/GATE 4 COMPLETE|已歸檔/,'5':/GATE 5 COMPLETE|任務完成｜關閉此頁/,'6':/GATE 6 COMPLETE/};
+  const patterns = {'1':/規則之印・碎片Ⅰ|完成第一關/,'2':/尚未完成的法案[\s\S]*重新測試第二關/,'3':/GATE 3 COMPLETE|\bCLEAR\b/,'4':/GATE 4 COMPLETE|已歸檔/,'5':/GATE 5 COMPLETE|任務完成｜關閉此頁/,'6':/GATE 6 COMPLETE/};
   const $ = (s,scope=document) => scope.querySelector(s);
   const finished = () => patterns[gate].test(document.body?.innerText || '');
   const startScreen = () => ({'1':!!$('.start'),'2':!!$('.g2-intro-dialogue:not(.hidden)'),'3':!!$('.title'),'4':!!$('.file-cover'),'5':/規則失控夜[\s\S]*末班車/.test(document.body?.innerText||''),'6':/進入案件受理室/.test(document.body?.innerText||'')})[gate];
