@@ -9,7 +9,7 @@
     const next=done.includes('c1')?(done.includes('c2')?(done.includes('c3')?0:3):2):1;
     const c2Done=done.includes('c2'),c3Done=done.includes('c3');
     const folder=(id,classes,name,subtitle,action)=>`<button data-case="${id}" class="physical-folder ${classes}" onclick="${action}"><b>${name}</b><br><small>${subtitle}</small></button>`;
-    const c1=folder('c1',done.includes('c1')?'closed':'','案件一','還沒賣出的大麻',next===1?'case1()':"toast('這份卷宗已結案。')");
+    const c1=folder('c1',done.includes('c1')?'closed':'','案件一','還沒賣出的大麻',done.includes('c1')?'case1()':next===1?'case1()':"toast('卷宗尚未開啟。')");
     const c2=folder('c2','two '+(c2Done?'':next===2?'':'lock'),'案件二','農作物災害補助申請案',c2Done?"toast('這份卷宗已結案。')":next===2?'case2Start()':"toast('卷宗尚未開啟。')");
     const c3=folder('c3','three '+(c3Done?'':next===3?'':'lock'),'案件三','地是我的，為什麼不能拆？',c3Done?'c3Summary()':next===3?'case3Start()':"toast('卷宗尚未開啟。')");
     app.innerHTML=`<section class="room"><div class="shade"></div><header class="top"><div><b>GATE 3｜解釋的邊界</b><br><small>深夜案件審查室</small></div></header><div class="folder-stack">${c1}${c2}${c3}</div><button class="lawbook real" aria-label="法規資料" onclick="${next===0?'finalLaw()':"toast('先處理桌上的案件。')"}">法規資料</button><button class="journal" onclick="journal()">案件紀錄本</button><button class="restart" onclick="restartGate3()">↻ 重新開始</button></section>`;

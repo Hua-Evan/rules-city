@@ -16,13 +16,13 @@ window.c1Reveal792=function(){closeModal();modal(`<h2>司法院釋字第792號</
 
 const CASE1_STORAGE_KEY='rules-city-gate3-v1';
 function case1Progress(){try{const progress=JSON.parse(localStorage.getItem(CASE1_STORAGE_KEY)||'{}');const done=progress.completed||[];return {...progress,completed:[...(progress.case1Completed||done.includes('c1')?['c1']:[]),...(progress.case2Completed||done.includes('c2')?['c2']:[]),...(progress.case3Completed||done.includes('c3')?['c3']:[])]}}catch{return {completed:[]}}}
-function saveCase1Progress(progress){const done=progress.completed||[];const completion={case1Completed:!!(progress.case1Completed||done.includes('c1')),case2Completed:!!(progress.case2Completed||done.includes('c2')),case3Completed:!!(progress.case3Completed||done.includes('c3'))};completion.gate3Completed=completion.case1Completed&&completion.case2Completed&&completion.case3Completed;localStorage.setItem(CASE1_STORAGE_KEY,JSON.stringify(completion));console.log(localStorage.getItem(CASE1_STORAGE_KEY));window.s={...window.s,...completion,completed:[...(completion.case1Completed?['c1']:[]),...(completion.case2Completed?['c2']:[]),...(completion.case3Completed?['c3']:[])]};window.state=window.s}
+function saveCase1Progress(progress){const done=progress.completed||[];const completion={case1Completed:!!(progress.case1Completed||done.includes('c1')),case2Completed:!!(progress.case2Completed||done.includes('c2')),case3Completed:!!(progress.case3Completed||done.includes('c3'))};completion.gate3Completed=completion.case1Completed&&completion.case2Completed&&completion.case3Completed;if(window.persistGate3Completion){window.persistGate3Completion({...completion,completed:done});}else{localStorage.setItem(CASE1_STORAGE_KEY,JSON.stringify(completion));window.s={...window.s,...completion,completed:[...(completion.case1Completed?['c1']:[]),...(completion.case2Completed?['c2']:[]),...(completion.case3Completed?['c3']:[])]};window.state=window.s}console.log(localStorage.getItem(CASE1_STORAGE_KEY));}
 window.completeCase1=function(){
   const progress=case1Progress();
-  saveCase1Progress({completed:Array.from(new Set([...(progress.completed||[]),'c1'])),case1Completed:true});closeModal();desk();
+  saveCase1Progress({completed:Array.from(new Set([...(progress.completed||[]),'c1'])),case1Completed:true});closeModal();(window.returnToGate3Desk||desk)();
 };
 window.openCase1Summary=function(){
-  modal('<h2>案件一｜還沒賣出的大麻</h2><p><b>✓ 已結案</b></p><h3>本案取得線索</h3><p>🔍 <b>文義解釋</b><br>從法律文字可能具有的意義理解規範。</p><p>🧩 <b>體系解釋</b><br>從法律規範彼此之間的關係理解條文意義。</p><h3>案件結果</h3><p><b>司法院釋字第792號</b></p><p>本案重新檢視了過去實務對「販賣」一詞的理解。</p><button class="primary" onclick="closeModal();desk()">關閉</button>');
+  modal('<h2>案件一｜還沒賣出的大麻</h2><p><b>✓ 已結案</b></p><h3>本案取得線索</h3><p>🔍 <b>文義解釋</b><br>從法律文字可能具有的意義理解規範。</p><p>🧩 <b>體系解釋</b><br>從法律規範彼此之間的關係理解條文意義。</p><h3>案件結果</h3><p><b>司法院釋字第792號</b></p><p>本案重新檢視了過去實務對「販賣」一詞的理解。</p><button class="primary" onclick="returnToGate3Desk()">返回案件桌面</button>');
 };
 const case1FlowEntry=window.case1;
 window.case1=function(){const progress=case1Progress();if(progress.case1Completed||(progress.completed||[]).includes('c1')){window.openCase1Summary();return}return case1FlowEntry()};
