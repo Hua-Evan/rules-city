@@ -9,3 +9,6 @@
 
 /* 受理筆記：兩種審查分列聲請主體，避免混讀。 */
 .complete-card .notebook:after{content:none}.review-section{padding:2px 0}.review-section h2{margin:8px 0 4px}.review-section p{margin:7px 0}.review-question{padding:8px 10px;background:#eee0c2;border-left:3px solid #b99a61}.review-rule{margin:12px 0 0;padding-top:10px;border-top:1px dashed #a78554}
+
+/* 案件整理頁：使用單一場景捲軸；進入時固定從筆記頂端開始。 */
+#gate6:has(.complete-card){height:100svh;min-height:0}@supports (height:100dvh){#gate6:has(.complete-card){height:100dvh}}#gate6 .scene:has(.complete-card){display:block;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;padding:15px 15px calc(24px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;scroll-behavior:auto}.scene:has(.complete-card) .complete-card{margin:0 0 12px;min-height:min-content}
