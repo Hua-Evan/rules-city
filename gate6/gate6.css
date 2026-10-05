@@ -6,3 +6,6 @@
 
 /* 共用答對狀態：低飽和綠色，保留至玩家繼續下一幕。 */
 .answer.correct,.folder.correct{border:3px solid #58745d;background:#e1e9dc;color:#263a2a}.answer.correct::after,.folder.correct::after{content:'✓';float:right;color:#426149;font-size:22px;font-weight:bold;line-height:1}
+
+/* 受理筆記：兩種審查分列聲請主體，避免混讀。 */
+.complete-card .notebook:after{content:none}.review-section{padding:2px 0}.review-section h2{margin:8px 0 4px}.review-section p{margin:7px 0}.review-question{padding:8px 10px;background:#eee0c2;border-left:3px solid #b99a61}.review-rule{margin:12px 0 0;padding-top:10px;border-top:1px dashed #a78554}

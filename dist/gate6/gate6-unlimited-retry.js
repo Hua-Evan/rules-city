@@ -229,7 +229,35 @@
     return true;
   }
 
+  function updateReviewNotes() {
+    const notebook = document.querySelector(".complete-card .notebook");
+    if (!notebook || notebook.dataset.reviewPresentation) return;
+
+    notebook.dataset.reviewPresentation = "separated-petitioners";
+    notebook.innerHTML = `
+      <section class="review-section">
+        <h2>法規範憲法審查</h2>
+        <p>審查的是「法規範本身」是否違憲。</p>
+        <p><b>可能聲請者</b><br>人民、法院、國家最高機關、達法定人數的立法委員等依法具有聲請權的主體。</p>
+        <p>其中人民聲請時，原則上必須先依法用盡審級救濟。</p>
+        <p class="review-question">核心問題：<br>「這個法律／命令本身，有沒有違反憲法？」</p>
+      </section>
+      <hr>
+      <section class="review-section">
+        <h2>裁判憲法審查</h2>
+        <p><b>聲請主體：人民</b></p>
+        <p>人民依法用盡審級救濟後，認為對自己不利的「確定終局裁判本身」侵害憲法保障的基本權，才可能聲請裁判憲法審查。</p>
+        <p class="review-question">核心問題：<br>「問題是在法規範本身，還是在法院的確定終局裁判本身？」</p>
+      </section>
+      <hr>
+      <div class="sticky">① 人民不一定只聲請裁判憲法審查<br>② 法院也可能聲請法規範憲法審查<br>③ 憲法法庭 ≠ 第四審</div>
+      <p class="pencil">不是所有「判錯」都等於「違憲」。</p>
+      <p class="review-rule"><b>法規範本身</b> → 法規範憲法審查<br><b>確定終局裁判本身</b> → 裁判憲法審查</p>
+    `;
+  }
+
   function updateBossClaims() {
+    updateReviewNotes();
     setAnswerText("b1", "主張甲主要質疑的是什麼？", {
       0: "工作人員的態度", 1: "禁拍規定本身",
       2: "法院最後的判決", 3: "行政救濟程序",
