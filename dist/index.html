@@ -13,7 +13,7 @@
   <main class="scene" id="scene" aria-label="規則之城入境大廳">
     <header class="masthead">
       <div><h1>規則之城</h1><p>入境大廳</p></div>
-      <div class="progress" id="progress" aria-live="polite">已踏入 0 / 6 道規則</div>
+      <div class="hall-tools"><div class="progress" id="progress" aria-live="polite">已踏入 0 / 6 道規則</div><button id="hallMenuToggle" class="hall-menu-toggle" type="button" aria-label="開啟大廳選單" aria-expanded="false">⋯</button><div id="hallMenu" class="hall-menu" hidden><button id="hallRestartCity" type="button">重新開始規則之城</button><button id="hallMenuClose" type="button">關閉</button></div></div>
     </header>
     <p class="unlock-message" aria-live="polite">FINAL GATE UNLOCKED<br><span>規則終章</span></p>
     <button class="final-gate" id="finalGate" type="button" aria-disabled="true"><b>FINAL GATE</b><span>規則終章</span><small>完成六道關卡後開啟</small></button>
@@ -35,6 +35,10 @@
           <div class="teacher-dialog__actions" id="teacherDialogActions"></div>
         </div>
       </div>
+    </section>
+    <section class="hall-reset-confirm" id="hallResetConfirm" role="dialog" aria-modal="true" aria-labelledby="hallResetTitle" hidden>
+      <div class="hall-reset-confirm__backdrop"></div>
+      <div class="hall-reset-confirm__card"><p>入境大廳</p><h2 id="hallResetTitle">重新開始規則之城？</h2><span>這會清除 Gate 1～6 與 FINAL GATE 的遊戲進度，所有關卡將恢復為尚未完成。</span><div><button id="hallResetCancel" type="button">取消</button><button id="hallResetConfirmButton" type="button">全部重新開始</button></div></div>
     </section>
   </main>
   <script src="js/hall.js"></script>

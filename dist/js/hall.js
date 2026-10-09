@@ -7,11 +7,33 @@
   const dialogTitle = document.querySelector('#teacherDialogTitle');
   const dialogMessage = document.querySelector('#teacherDialogMessage');
   const dialogActions = document.querySelector('#teacherDialogActions');
+  const menuToggle = document.querySelector('#hallMenuToggle');
+  const hallMenu = document.querySelector('#hallMenu');
+  const resetConfirm = document.querySelector('#hallResetConfirm');
   const saved = key => { try { return JSON.parse(localStorage.getItem(key) || '{}') } catch { return {} } };
   const previous = [saved('rules-city-level1-final-v1').checkoutCompleted, saved('rules-city-gate2-v5').done, saved('rules-city-gate3-v1').gate3Completed, saved('rules-city-gate4-v1').complete, localStorage.getItem('gate5_complete') === 'true', saved('rules-city-gate6-v1').complete];
+  const rulesCityKeys = [
+    'rules-city-level1-final-v1', 'rules-city-gate2-v4', 'rules-city-gate2-v5', 'rules-city-level2-v1',
+    'rules-city-gate3-v1', 'rules-city-gate4-v1', 'rules-city-gate6-v1',
+    'gate1Completed', 'gate2Completed', 'gate3Completed', 'gate4Completed', 'gate5Completed', 'gate6Completed',
+    'rulesCityFinalUnlocked', 'rulesCityFinalCompleted', 'rulesCityFinalLastScore', 'rulesCityFinalLastDisplayScore',
+    'rulesCityFinalLastTime', 'rulesCityFinalLastCorrect', 'rulesCityFinalLastAnswers', 'rulesCityFinalLastQuestionPoints',
+    'rulesCityFinalCompletedAt', 'rulesCityFinalIntroSeen', 'rulesCityFinalCelebrationSeen',
+    'rulesCityFinalTestCompleted', 'rulesCityFinalTestLastScore', 'rulesCityFinalTestLastDisplayScore',
+    'rulesCityFinalTestLastTime', 'rulesCityFinalTestLastCorrect', 'rulesCityFinalTestLastAnswers', 'rulesCityFinalTestLastQuestionPoints'
+  ];
 
+  const resetRulesCityProgress = () => {
+    rulesCityKeys.forEach(key => localStorage.removeItem(key));
+    Object.keys(localStorage).filter(key => key.startsWith('gate5_')).forEach(key => localStorage.removeItem(key));
+    Object.keys(sessionStorage).filter(key => key.startsWith('gate5_')).forEach(key => sessionStorage.removeItem(key));
+  };
+  window.resetRulesCityProgress = resetRulesCityProgress;
   previous.forEach((value, index) => { if (value) localStorage.setItem(`gate${index + 1}Completed`, 'true') });
   const done = () => gates.filter(gate => localStorage.getItem(`gate${gate.dataset.gate}Completed`) === 'true');
+  const closeMenu = () => { hallMenu.hidden = true; menuToggle.setAttribute('aria-expanded', 'false') };
+  const closeResetConfirm = () => { resetConfirm.hidden = true; document.body.classList.remove('dialog-open') };
+  const openResetConfirm = () => { closeMenu(); resetConfirm.hidden = false; document.body.classList.add('dialog-open'); document.querySelector('#hallResetCancel').focus() };
   const closeTeacher = () => { dialog.hidden = true; document.body.classList.remove('dialog-open') };
   const showTeacher = ({ title, message, actions }) => {
     dialogTitle.textContent = title;
@@ -32,37 +54,20 @@
   const showUnlockTeacher = () => {
     if (localStorage.getItem('rulesCityFinalIntroSeen') === 'true') return;
     localStorage.setItem('rulesCityFinalIntroSeen', 'true');
-    showTeacher({
-      title: '恭喜你闖過六關！',
-      message: '你已經一路走過權利、制度與憲法的考驗。接下來，還有最後一道關卡：規則終章。準備好把你的理解帶進最終試煉了嗎？',
-      actions: [
-        { label: '確定闖入最後一關', primary: true, onClick: () => { window.location.href = 'final.html' } },
-        { label: '我想先留在大廳', onClick: closeTeacher }
-      ]
-    });
+    showTeacher({ title: '恭喜你闖過六關！', message: '你已經一路走過權利、制度與憲法的考驗。接下來，還有最後一道關卡：規則終章。準備好把你的理解帶進最終試煉了嗎？', actions: [{ label: '確定闖入最後一關', primary: true, onClick: () => { window.location.href = 'final.html' } }, { label: '我想先留在大廳', onClick: closeTeacher }] });
   };
   const showCompletionTeacher = () => {
     if (localStorage.getItem('rulesCityFinalCelebrationSeen') === 'true') return;
     localStorage.setItem('rulesCityFinalCelebrationSeen', 'true');
-    showTeacher({
-      title: '你完成規則終章了！',
-      message: '恭喜你完成所有挑戰。分數是學習的線索，而你願意思考每一條規則背後的權利、責任與選擇，才是最重要的收穫。',
-      actions: [{ label: '謝謝老師，回到大廳', primary: true, onClick: closeTeacher }]
-    });
+    showTeacher({ title: '你完成規則終章了！', message: '恭喜你完成所有挑戰。分數是學習的線索，而你願意思考每一條規則背後的權利、責任與選擇，才是最重要的收穫。', actions: [{ label: '謝謝老師，回到大廳', primary: true, onClick: closeTeacher }] });
   };
-  const openGate = button => {
-    button.classList.add('entering');
-    setTimeout(() => { window.location.href = button.dataset.href }, 420);
-  };
+  const openGate = button => { button.classList.add('entering'); setTimeout(() => { window.location.href = button.dataset.href }, 420) };
   const unlock = (animate, completed) => {
     finalGate.setAttribute('aria-disabled', 'false');
     finalGate.classList.toggle('done', completed);
     finalGate.setAttribute('aria-label', completed ? 'FINAL GATE｜規則終章，已完成' : 'FINAL GATE｜規則終章，入口已開啟');
     finalGate.querySelector('small').textContent = completed ? '最終試煉完成' : '入口已開啟';
-    if (animate) {
-      scene.classList.add('unlocking');
-      setTimeout(showUnlockTeacher, 5000);
-    }
+    if (animate) { scene.classList.add('unlocking'); setTimeout(showUnlockTeacher, 5000) }
   };
   const render = () => {
     const completedGates = done();
@@ -79,6 +84,13 @@
 
   gates.forEach(gate => gate.addEventListener('click', () => openGate(gate)));
   finalGate.addEventListener('click', () => { if (finalGate.getAttribute('aria-disabled') === 'false') window.location.href = 'final.html' });
+  menuToggle.addEventListener('click', () => { const open = hallMenu.hidden; hallMenu.hidden = !open; menuToggle.setAttribute('aria-expanded', String(open)) });
+  document.querySelector('#hallMenuClose').addEventListener('click', closeMenu);
+  document.querySelector('#hallRestartCity').addEventListener('click', openResetConfirm);
+  resetConfirm.addEventListener('click', event => event.stopPropagation());
+  document.querySelector('#hallResetCancel').addEventListener('click', event => { event.preventDefault(); event.stopPropagation(); closeResetConfirm() });
+  document.querySelector('#hallResetConfirmButton').addEventListener('click', event => { event.preventDefault(); event.stopPropagation(); resetRulesCityProgress(); window.location.replace('index.html') });
+  document.addEventListener('click', event => { if (!event.target.closest('.hall-tools')) closeMenu() });
   dialog.querySelector('[data-dialog-close="true"]').addEventListener('click', closeTeacher);
   render();
 })();
