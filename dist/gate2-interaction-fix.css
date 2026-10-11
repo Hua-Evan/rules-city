@@ -52,3 +52,5 @@
 .g2-game.complete-stage{height:100svh;height:100dvh;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 .g2-game.complete-stage .g2-stage{min-height:auto;padding-top:calc(5.8rem + env(safe-area-inset-top));padding-bottom:calc(1.25rem + env(safe-area-inset-bottom));display:block}
 .g2-game.complete-stage .g2-complete{box-sizing:border-box;margin:0 auto 1.1rem}
+.g2-complete-actions{display:grid;gap:.55rem;margin-top:1rem}
+.g2-complete-actions .g2-vote{margin:0}
