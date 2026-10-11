@@ -47,3 +47,8 @@
 .g2-notebook .g2-notebook-route{margin:.75rem 0 .25rem;padding:.38rem .5rem;background:#eee0bd;color:#61432d;font-weight:700}
 .g2-notebook-actions{padding-bottom:calc(.5rem + env(safe-area-inset-bottom))}
 @media(max-width:430px){.g2-game.notebook-stage .g2-stage{padding-left:.55rem;padding-right:.55rem}.g2-game.notebook-stage .g2-notebook{width:100%;max-width:390px;padding:.85rem}.g2-notebook .g2-big-stamp{font-size:.98rem}.g2-notebook .g2-notebook-route{font-size:.78rem}}
+
+/* 通關流程圖同樣保留在結尾的獨立捲動區，確保可抵達筆記入口。 */
+.g2-game.complete-stage{height:100svh;height:100dvh;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.g2-game.complete-stage .g2-stage{min-height:auto;padding-top:calc(5.8rem + env(safe-area-inset-top));padding-bottom:calc(1.25rem + env(safe-area-inset-bottom));display:block}
+.g2-game.complete-stage .g2-complete{box-sizing:border-box;margin:0 auto 1.1rem}
