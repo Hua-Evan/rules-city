@@ -20,20 +20,21 @@
 @media(max-width:430px){.g2-hud{padding:max(.65rem,env(safe-area-inset-top)) .75rem .35rem}.g2-hud b{font-size:.82rem}.g2-hud small{font-size:.62rem}.g2-folder{min-width:58px}.g2-stage{padding-bottom:1.1rem}.g2-bill-pair{gap:.55rem}.g2-bill{min-width:0}.g2-bill b{font-size:.65rem}.g2-bill span{font-size:.53rem}.g2-trays{gap:.35rem}.g2-tray{min-height:48px}.g2-neg-desk{min-height:500px}.g2-neg-scatter{gap:.38rem}.g2-neg-scatter .g2-paper{min-height:58px}.g2-neg-desk .g2-confirm{right:2%;bottom:2%;font-size:.61rem}.g2-neg-desk .g2-stamp{bottom:10%;right:2%;transform:scale(.82);transform-origin:bottom right}.g2-order-source,.g2-evidence-source{gap:.45rem}.g2-order-source .g2-paper,.g2-evidence-source .g2-paper{min-height:55px}.g2-verify-sheet{width:min(94%,390px)}.g2-verify-row{min-height:54px}.g2-notebook{max-height:calc(100vh - 92px);padding:.85rem}.g2-notebook h1{font-size:1.15rem}.g2-notebook p{font-size:.83rem}}
 
 /* 程序證據冊：手機以點選填入，內容可在關卡內垂直捲動。 */
-.g2-verify-stage{height:100vh;height:100dvh;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scroll-padding-bottom:calc(5rem + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;touch-action:pan-y}
-.g2-verify-stage .g2-stage{min-height:auto;padding-top:calc(5.8rem + env(safe-area-inset-top));padding-bottom:calc(5rem + env(safe-area-inset-bottom));display:block}
-.g2-verify-stage .g2-prompt{margin-bottom:.7rem}
-.g2-verify-stage .g2-verify-sheet{box-sizing:border-box;margin:0 auto 1.1rem}
-.g2-verify-stage .g2-verify-slots{gap:.35rem}
-.g2-verify-stage .g2-verify-row{min-height:46px;margin:0;padding:.3rem .45rem}
-.g2-verify-stage .g2-verify-row span{display:inline-block;margin-right:.45rem}
-.g2-verify-stage .g2-verify-row b{display:inline;font-size:.72rem}
-.g2-verify-stage .g2-verify-source{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;min-height:0;margin:.8rem 0}
-.g2-verify-stage .g2-evidence-source .g2-paper{width:auto;min-height:62px;padding:.48rem}
-.g2-verify-stage .g2-civic-reminder{margin:.85rem 0 .7rem;padding:.55rem .65rem;background:#eee0bc;color:#4b3929;border-left:3px solid #a66e42;box-shadow:2px 3px 5px #0004;transform:rotate(-.4deg);font-family:serif}
-.g2-verify-stage .g2-civic-reminder b{font-size:.72rem;color:#7a4931}
-.g2-verify-stage .g2-civic-reminder p{margin:.28rem 0 0;font-size:.68rem;line-height:1.5}
-.g2-verify-stage .g2-confirm{margin-top:.65rem}
-@media(max-width:430px){.g2-verify-stage .g2-stage{padding-left:.55rem;padding-right:.55rem}.g2-verify-stage .g2-verify-sheet{width:100%;max-width:390px;padding:.75rem}.g2-verify-stage .g2-verify-agenda{margin:.45rem 0 .6rem;padding:.4rem}.g2-verify-stage .g2-verify-row{min-height:42px}.g2-verify-stage .g2-evidence-source .g2-paper{min-height:56px;padding:.4rem}.g2-verify-stage .g2-civic-reminder{margin-top:.7rem}.g2-verify-stage .g2-civic-reminder p{font-size:.65rem}}
+.g2-game.verify-stage{height:100svh;height:100dvh;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scroll-padding-bottom:calc(5rem + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.g2-game.verify-stage .g2-stage{min-height:auto;padding-top:calc(5.8rem + env(safe-area-inset-top));padding-bottom:calc(1.25rem + env(safe-area-inset-bottom));display:block}
+.g2-game.verify-stage .g2-prompt{margin-bottom:.7rem}
+.g2-game.verify-stage .g2-verify-sheet{box-sizing:border-box;margin:0 auto 1.1rem}
+.g2-game.verify-stage .g2-verify-slots{gap:.35rem}
+.g2-game.verify-stage .g2-verify-row{min-height:46px;margin:0;padding:.3rem .45rem}
+.g2-game.verify-stage .g2-verify-row span{display:inline-block;margin-right:.45rem}
+.g2-game.verify-stage .g2-verify-row b{display:inline;font-size:.72rem}
+.g2-game.verify-stage .g2-verify-source{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;min-height:0;margin:.8rem 0}
+.g2-game.verify-stage .g2-evidence-source .g2-paper{width:auto;min-height:62px;padding:.48rem}
+.g2-game.verify-stage .g2-civic-reminder{margin:.85rem 0 .7rem;padding:.55rem .65rem;background:#eee0bc;color:#4b3929;border-left:3px solid #a66e42;box-shadow:2px 3px 5px #0004;transform:rotate(-.4deg);font-family:serif}
+.g2-game.verify-stage .g2-civic-reminder b{font-size:.72rem;color:#7a4931}
+.g2-game.verify-stage .g2-civic-reminder p{margin:.28rem 0 0;font-size:.68rem;line-height:1.5}
+.g2-game.verify-stage .g2-confirm{margin-top:.65rem}
+.g2-game.verify-stage .g2-message{position:static;transform:none;width:auto;margin:0 .8rem calc(.9rem + env(safe-area-inset-bottom));text-align:center}
+@media(max-width:430px){.g2-game.verify-stage .g2-stage{padding-left:.55rem;padding-right:.55rem}.g2-game.verify-stage .g2-verify-sheet{width:100%;max-width:390px;padding:.75rem}.g2-game.verify-stage .g2-verify-agenda{margin:.45rem 0 .6rem;padding:.4rem}.g2-game.verify-stage .g2-verify-row{min-height:42px}.g2-game.verify-stage .g2-evidence-source .g2-paper{min-height:56px;padding:.4rem}.g2-game.verify-stage .g2-civic-reminder{margin-top:.7rem}.g2-game.verify-stage .g2-civic-reminder p{font-size:.65rem}}
 
 
