@@ -37,4 +37,15 @@
 .g2-game.verify-stage .g2-message{position:static;transform:none;width:auto;margin:0 .8rem calc(.9rem + env(safe-area-inset-bottom));text-align:center}
 @media(max-width:430px){.g2-game.verify-stage .g2-stage{padding-left:.55rem;padding-right:.55rem}.g2-game.verify-stage .g2-verify-sheet{width:100%;max-width:390px;padding:.75rem}.g2-game.verify-stage .g2-verify-agenda{margin:.45rem 0 .6rem;padding:.4rem}.g2-game.verify-stage .g2-verify-row{min-height:42px}.g2-game.verify-stage .g2-evidence-source .g2-paper{min-height:56px;padding:.4rem}.g2-game.verify-stage .g2-civic-reminder{margin-top:.7rem}.g2-game.verify-stage .g2-civic-reminder p{font-size:.65rem}}
 
+/* 通關筆記：背景保留固定，僅筆記階段由實際場景根元素垂直捲動。 */
+.g2-game.notebook-stage{height:100svh;height:100dvh;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scroll-padding-bottom:calc(1.5rem + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.g2-game.notebook-stage .g2-stage{min-height:auto;padding-top:calc(5.8rem + env(safe-area-inset-top));padding-bottom:calc(1.25rem + env(safe-area-inset-bottom));display:block}
+.g2-game.notebook-stage .g2-notebook{box-sizing:border-box;max-height:none;overflow:visible;margin:0 auto 1.1rem}
+.g2-game.notebook-stage .g2-message{position:static;transform:none;width:auto;margin:0 .8rem calc(.9rem + env(safe-area-inset-bottom));text-align:center}
+.g2-notebook .g2-big-stamp{font-size:1.05rem;margin:0 auto .7rem}
+.g2-notebook .g2-notebook-label{margin: .7rem 0 .12rem;color:#5f412c;font-weight:700}
+.g2-notebook .g2-notebook-route{margin:.75rem 0 .25rem;padding:.38rem .5rem;background:#eee0bd;color:#61432d;font-weight:700}
+.g2-notebook-actions{padding-bottom:calc(.5rem + env(safe-area-inset-bottom))}
+@media(max-width:430px){.g2-game.notebook-stage .g2-stage{padding-left:.55rem;padding-right:.55rem}.g2-game.notebook-stage .g2-notebook{width:100%;max-width:390px;padding:.85rem}.g2-notebook .g2-big-stamp{font-size:.98rem}.g2-notebook .g2-notebook-route{font-size:.78rem}}
+
 
